@@ -1,3 +1,7 @@
+<a href="https://www.buymeacoffee.com/weemaba">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174">
+</a>
+
 # Dynamic Tariff Savings Suite
 
 > **See in euros what your dynamic electricity contract is actually worth.**
