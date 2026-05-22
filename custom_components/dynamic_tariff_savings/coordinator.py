@@ -95,7 +95,7 @@ class DynamicTariffSavingsCoordinator(DataUpdateCoordinator):
     # ------------------------------------------------------------------ #
 
     async def async_initialize(self) -> None:
-        """Load persisted state, set up listeners and time triggers."""
+        """Load persisted state, seed snapshots, set up listeners."""
         stored: dict[str, Any] | None = await self._store.async_load()
         if stored:
             self.engine = CounterfactualEngine.from_dict(stored.get("engine"))
@@ -105,6 +105,43 @@ class DynamicTariffSavingsCoordinator(DataUpdateCoordinator):
 
         if self._current_month is None:
             self._current_month = dt_util.now().month
+
+        # Seed last-known meter values from current sensor state. This prevents
+        # the first delta after setup (or after a sensor-swap via options) from
+        # being huge — without this, a freshly-loaded coordinator would compute
+        # delta = current_value - 0 on the next state change.
+        #
+        # We also defensively reset the snapshot if the stored value is
+        # implausibly far from the current value (e.g. user changed sensors
+        # from a power sensor to a kWh totalizer). Threshold: 10x.
+        import_state = self.hass.states.get(self.grid_import_sensor)
+        import_now = _safe_float(import_state)
+        if import_now is not None:
+            if (
+                self._last_import_kwh is None
+                or self._last_import_kwh == 0
+                or abs(import_now - self._last_import_kwh) > max(10.0, import_now * 0.9)
+            ):
+                _LOGGER.info(
+                    "Seeding import snapshot from current sensor state: %.3f kWh",
+                    import_now,
+                )
+                self._last_import_kwh = import_now
+
+        if self.grid_export_sensor:
+            export_state = self.hass.states.get(self.grid_export_sensor)
+            export_now = _safe_float(export_state)
+            if export_now is not None:
+                if (
+                    self._last_export_kwh is None
+                    or self._last_export_kwh == 0
+                    or abs(export_now - self._last_export_kwh) > max(10.0, export_now * 0.9)
+                ):
+                    _LOGGER.info(
+                        "Seeding export snapshot from current sensor state: %.3f kWh",
+                        export_now,
+                    )
+                    self._last_export_kwh = export_now
 
         # State change listeners
         sensors = [self.grid_import_sensor]
@@ -129,6 +166,9 @@ class DynamicTariffSavingsCoordinator(DataUpdateCoordinator):
                 EVENT_HOMEASSISTANT_STOP, self._async_on_stop
             )
         )
+
+        # Persist the seed immediately so an early restart doesn't lose it
+        await self._async_persist()
 
         await self.async_config_entry_first_refresh()
 
