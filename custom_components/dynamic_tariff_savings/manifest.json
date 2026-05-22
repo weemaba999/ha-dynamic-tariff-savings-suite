@@ -1,0 +1,13 @@
+{
+  "domain": "dynamic_tariff_savings",
+  "name": "Dynamic Tariff Savings Suite",
+  "version": "0.1.0",
+  "documentation": "https://github.com/weemaba999/ha-dynamic-tariff-savings-suite",
+  "issue_tracker": "https://github.com/weemaba999/ha-dynamic-tariff-savings-suite/issues",
+  "codeowners": ["@weemaba999"],
+  "config_flow": true,
+  "dependencies": [],
+  "requirements": [],
+  "iot_class": "calculated",
+  "integration_type": "service"
+}

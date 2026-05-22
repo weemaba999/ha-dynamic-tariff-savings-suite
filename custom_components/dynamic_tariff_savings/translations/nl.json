@@ -1,0 +1,39 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "DTS Suite",
+        "description": "Vergelijk je dynamisch elektriciteitscontract met een vast referentiecontract. Kies de netimport/-export sensors, je dynamische prijssensor (bv. Nordpool/ENTSO-e), en de vaste referentieprijzen om mee te vergelijken.",
+        "data": {
+          "grid_import_sensor": "Netafname (kWh-teller)",
+          "grid_export_sensor": "Netinjectie (kWh-teller)",
+          "dynamic_price_sensor": "Dynamische afnameprijs (€/kWh)",
+          "dynamic_export_price_sensor": "Dynamische injectieprijs (€/kWh, optioneel)",
+          "baseline_import_price": "Vaste referentie afnameprijs (€/kWh)",
+          "baseline_export_price": "Vaste referentie injectieprijs (€/kWh)",
+          "currency": "Munt"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "DTS Suite is al geconfigureerd."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "DTS Suite opties",
+        "description": "Pas sensors en referentieprijzen aan.",
+        "data": {
+          "grid_import_sensor": "Netafname (kWh-teller)",
+          "grid_export_sensor": "Netinjectie (kWh-teller)",
+          "dynamic_price_sensor": "Dynamische afnameprijs (€/kWh)",
+          "dynamic_export_price_sensor": "Dynamische injectieprijs (€/kWh, optioneel)",
+          "baseline_import_price": "Vaste referentie afnameprijs (€/kWh)",
+          "baseline_export_price": "Vaste referentie injectieprijs (€/kWh)",
+          "currency": "Munt"
+        }
+      }
+    }
+  }
+}

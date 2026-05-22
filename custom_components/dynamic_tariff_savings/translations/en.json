@@ -1,0 +1,39 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "DTS Suite",
+        "description": "Compare your dynamic electricity contract against a fixed baseline contract. Pick the grid energy sensors, your dynamic price sensor (e.g. Nordpool/ENTSO-e), and the fixed reference prices you want to compare against.",
+        "data": {
+          "grid_import_sensor": "Grid import (kWh totalizer)",
+          "grid_export_sensor": "Grid export (kWh totalizer)",
+          "dynamic_price_sensor": "Dynamic import price (€/kWh)",
+          "dynamic_export_price_sensor": "Dynamic export price (€/kWh, optional)",
+          "baseline_import_price": "Baseline fixed import price (€/kWh)",
+          "baseline_export_price": "Baseline fixed export price (€/kWh)",
+          "currency": "Currency"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "DTS Suite is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "DTS Suite options",
+        "description": "Adjust sensors and reference prices.",
+        "data": {
+          "grid_import_sensor": "Grid import (kWh totalizer)",
+          "grid_export_sensor": "Grid export (kWh totalizer)",
+          "dynamic_price_sensor": "Dynamic import price (€/kWh)",
+          "dynamic_export_price_sensor": "Dynamic export price (€/kWh, optional)",
+          "baseline_import_price": "Baseline fixed import price (€/kWh)",
+          "baseline_export_price": "Baseline fixed export price (€/kWh)",
+          "currency": "Currency"
+        }
+      }
+    }
+  }
+}
