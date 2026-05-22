@@ -35,7 +35,7 @@ from .const import (
     STORAGE_VERSION,
     UPDATE_INTERVAL_SECONDS,
 )
-from .engine.counterfactual import CounterfactualEngine
+from .counterfactual import CounterfactualEngine
 
 _LOGGER = logging.getLogger(__name__)
 

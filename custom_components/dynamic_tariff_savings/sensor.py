@@ -22,7 +22,7 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import CONF_CURRENCY, DEFAULT_CURRENCY, DOMAIN
 from .coordinator import DynamicTariffSavingsCoordinator
-from .engine.counterfactual import CounterfactualEngine, PeriodAccumulator
+from .counterfactual import CounterfactualEngine, PeriodAccumulator
 
 
 @dataclass(frozen=True)

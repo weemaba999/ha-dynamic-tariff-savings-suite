@@ -5,7 +5,7 @@ import math
 
 import pytest
 
-from engine.counterfactual import CounterfactualEngine, PeriodAccumulator
+from counterfactual import CounterfactualEngine, PeriodAccumulator
 
 
 def test_empty_engine_has_zero_savings():

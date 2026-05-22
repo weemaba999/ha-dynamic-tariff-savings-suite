@@ -104,14 +104,12 @@ class DynamicTariffSavingsConfigFlow(ConfigFlow, domain=DOMAIN):
     @staticmethod
     @callback
     def async_get_options_flow(config_entry) -> OptionsFlow:
-        return DynamicTariffSavingsOptionsFlow(config_entry)
+        # config_entry is auto-injected on OptionsFlow since HA 2024.12
+        return DynamicTariffSavingsOptionsFlow()
 
 
 class DynamicTariffSavingsOptionsFlow(OptionsFlow):
     """Allow editing baseline prices and sensor wiring."""
-
-    def __init__(self, config_entry) -> None:
-        self.config_entry = config_entry
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
